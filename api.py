@@ -12,12 +12,20 @@ def _get(param):
     resp, cont = hObj.request(wSrc + '?' + param)
     return json.loads(cont)
 
-def search(type, search): #Annoying keywords
+def search(type, search):
     return _get({
         'action': 'wbsearchentities',
         'language': lang,
         'search': search,
         'type': type
+    })
+
+def query(serach):
+    return _get({
+        'action': 'query',
+        'titles': '|'.join(search),
+        'prop': 'revisions',
+        'rvprop': 'content'
     })
 
 def getEntities(ids, props):
