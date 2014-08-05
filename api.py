@@ -10,7 +10,7 @@ def _get(param):
     param['format'] = 'json'
     param = urllib.urlencode(param)
     resp, cont = hObj.request(wSrc + '?' + param)
-    return json.dumps(cont)
+    return json.loads(cont)
 
 def search(type, search): #Annoying keywords
     return _get({
@@ -39,7 +39,7 @@ def formatDatavalue(datavalue):
     return _get({
         'action': 'wbformatvalue',
         'language': 'text/plain',
-        'datavalue': json.loads(datavalue),
+        'datavalue': json.dumps(datavalue),
         'options': json.dumps({
             'lang': lang,
             'geoformat': 'dms'
